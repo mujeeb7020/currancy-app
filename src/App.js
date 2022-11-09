@@ -1,17 +1,21 @@
 import logo from "./logo.svg";
 import "./App.css";
+import NavBar from "./NavBar";
 import Money from "./Money.js";
-import NavBar from "./NavBar.js";
-import Books from "./Pages/Books";
-import { Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import AllData from "./AllData";
 
 function App() {
   return (
     <>
       <NavBar />
-      <Money />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<Money />} exact />
 
-
+          <Route path="/alldata" element={<AllData />} exact />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
