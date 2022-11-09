@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import AllData from "./AllData";
+
 import { Container, Nav, Navbar, Button, Form, Table } from "react-bootstrap";
 
 // get local data
@@ -22,6 +22,8 @@ const Money = () => {
   const [drop, setDrop] = useState("");
   const [data, setData] = useState(getLocalItems());
 
+  // const[newdata,setNewdata]=useState("");
+
   const formSubmit = (e) => {
     e.preventDefault();
 
@@ -35,16 +37,18 @@ const Money = () => {
 
     setData([...data, allInfo]);
 
-    reset();
+    setInr(null);
+    setUsd(null);
+    setSender("");
+    setReceiver("")
+    setDrop([])
+
+
+
+    
   };
 
-  function reset() {
-    setUsd("");
-    setInr("");
-    setSender("");
-    setReceiver("");
-    setDrop("");
-  }
+  
 
   useEffect(() => {
     localStorage.setItem("lists", JSON.stringify(data));
@@ -53,20 +57,14 @@ const Money = () => {
   // remove Data
 
   const removeItems = () => {
-     localStorage.removeItem('lists');
-     setData([]);
-
-    
+    // localStorage.removeItem("lists");
+    setData([]);
   };
 
-  function calculate(data){
-    setTimeout(()=>{
-        setInr(usd * 80)
-    }, 2000 )
-    }
-    calculate();
-
- 
+  const ConvertUsdToRupee = (value) => {
+    
+    setInr(value * 80);
+  };
 
   // reflect the amount from USD to INR
 
@@ -82,7 +80,11 @@ const Money = () => {
     <>
       <div className="container mt-2 pt-2 border border-primary col-6">
         <div className="row  mt-5 col-6  ">
-          <Form id="frm" onSubmit={formSubmit}>
+
+          <Form  onSubmit={formSubmit}>
+
+            {/* 1st text field */}
+
             <Form.Group
               onChange={(e) => setUsd(e.target.value)}
               value={usd}
@@ -90,23 +92,33 @@ const Money = () => {
               controlId="formBasicEmail"
             >
               <Form.Control
+                value={usd}
+                onChange={(e) => ConvertUsdToRupee(e.target.value)}
                 type="text"
                 placeholder="Amount To Be Send in USD"
               />
             </Form.Group>
 
+
+{/* 2nd textfield */}
+
             <Form.Group
-              onChange={(e) => setInr(e.target.value)}
               value={inr}
+              onChange={(e) => setInr(e.target.value)}
               className="mb-3 "
               controlId="formBasicPassword"
             >
               <Form.Control
+                value={inr}
+                onChange={(e) => setInr(e.target.value)}
                 type="text"
                 // disabled={true}
                 placeholder="Amount to Be Received in INR"
               />
             </Form.Group>
+
+
+{/* 3rd text field */}
 
             <Form.Group
               onChange={(e) => setSender(e.target.value)}
@@ -117,6 +129,7 @@ const Money = () => {
               <Form.Control type="text" placeholder="Sender Name" />
             </Form.Group>
 
+{/* 4th text field */}
             <Form.Group
               onChange={(e) => setReceiver(e.target.value)}
               value={receiver}
@@ -125,6 +138,9 @@ const Money = () => {
             >
               <Form.Control type="text" placeholder="Receiver Name" />
             </Form.Group>
+
+
+{/* 5th text field(dropdown) */}
 
             <Form.Select onChange={(e) => setDrop(e.target.value)} size="lg">
               <option>SELECT ANY</option>
@@ -170,6 +186,7 @@ const Money = () => {
             </thead>
             <tbody>
               {data.map((elem, id) => {
+                console.log(elem,"elemnet");
                 return (
                   <>
                     <tr>
