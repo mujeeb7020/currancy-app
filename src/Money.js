@@ -62,8 +62,10 @@ const Money = () => {
   };
 
   const ConvertUsdToRupee = (value) => {
+    setTimeout(() => {
+      setInr(value * 80); 
+    }, 2000);
     
-    setInr(value * 80);
   };
 
   // reflect the amount from USD to INR
