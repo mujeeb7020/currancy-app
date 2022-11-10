@@ -8,7 +8,7 @@ const NavBar = () => {
     <>
      <Navbar bg="dark" variant="dark"> 
         <Container>
-          <Navbar.Brand >CURRANCY APP</Navbar.Brand>  {/*href="home"*/ }
+          <Navbar.Brand href="home" >CURRANCY APP</Navbar.Brand>  
           <Nav className="me-auto">
             <Nav.Link href="home">Home</Nav.Link>
             <Nav.Link href="alldata">All data</Nav.Link>

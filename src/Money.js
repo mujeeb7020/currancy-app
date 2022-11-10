@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
 import { useState } from "react";
-import { Container, Nav, Navbar, Button, Form, Table } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
-// here i am geeting local data 
+// here i am geeting local data
 const getLocalItems = () => {
   let list = localStorage.getItem("lists");
 
@@ -15,7 +14,7 @@ const getLocalItems = () => {
 
 const Money = () => {
   const [usd, setUsd] = useState();
-  const [inr, setInr] = useState(0);
+  const [inr, setInr] = useState();
   const [sender, setSender] = useState("");
   const [receiver, setReceiver] = useState("");
   const [drop, setDrop] = useState("");
@@ -30,7 +29,10 @@ const Money = () => {
       receiver: receiver,
       drop: drop,
     };
-    localStorage.setItem( "lists", JSON.stringify([...getLocalItems(),allInfo]));
+    localStorage.setItem(
+      "lists",
+      JSON.stringify([...getLocalItems(), allInfo])
+    );
 
     removeItems();
   };
@@ -76,11 +78,7 @@ const Money = () => {
 
             {/* 2nd textfield */}
 
-            <Form.Group
-              // value={inr}
-              className="mb-3 "
-              controlId="formBasicPassword"
-            >
+            <Form.Group className="mb-3 " controlId="formBasicPassword">
               <Form.Control
                 value={inr}
                 type="number"
@@ -125,7 +123,7 @@ const Money = () => {
 
             <br />
 
-            <div className=" mb-3">
+            <div className=" container mb-3">
               <Button variant="primary" type="submit">
                 Submit
               </Button>

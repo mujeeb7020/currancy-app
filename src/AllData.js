@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-import {  Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
 // get local data
 const getLocalItems = () => {
@@ -17,13 +17,9 @@ const getLocalItems = () => {
 const AllData = () => {
   const [data, setData] = useState([]);
 
-  
-
   useEffect(() => {
     setData(getLocalItems());
-  }, []);
-
-  
+  }, [data]);
 
   return (
     <>
